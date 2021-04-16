@@ -5,6 +5,8 @@ import m3u8, requests, validators
 from Crypto.Cipher import AES
 
 from colorama import init, Fore, Style
+from bs4 import BeautifulSoup
+
 init(autoreset=True)
 
 def stop():
@@ -46,7 +48,15 @@ if __name__ == '__main__':
     elif data.status_code != 200:
         printError("Can't get the link. Status code: %s" % data.status_code)
     elif "sproutvideo.com" in videoUrl:
-        data = data.text
+        if 'playlist' in videoUrl:
+            soup = BeautifulSoup(data.text, 'html.parser')
+            src_attribute = soup.find("iframe")["src"]
+            if src_attribute[:2] == '//':
+                src_attribute = 'https:'+src_attribute
+            data = session.get(src_attribute)
+            data = data.text
+        else:    
+            data = data.text
     else:
         y_or_n = ""
         while y_or_n.lower() != "n" or y_or_n.lower() != "y":

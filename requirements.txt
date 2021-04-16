@@ -1,5 +1,14 @@
+beautifulsoup4==4.9.3
+certifi==2020.12.5
+chardet==3.0.4
 colorama==0.4.3
-requests==2.22.0
-validators==0.14.2
+decorator==5.0.7
+idna==2.8
+iso8601==0.1.14
 m3u8==0.5.4
 pycryptodome==3.9.7
+requests==2.22.0
+six==1.15.0
+soupsieve==2.2.1
+urllib3==1.25.11
+validators==0.14.2
